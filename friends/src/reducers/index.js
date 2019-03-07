@@ -8,7 +8,10 @@ import {
     LOG_OUT,
     DELETE_START,
     DELETE_SUCCESS,
-    DELETE_FAILED
+    DELETE_FAILED,
+    ADD_START,
+    ADD_COMPLETE,
+    ADD_FAILED
 } from '../actions'
  
 const initialState = {
@@ -71,6 +74,8 @@ export const reducer = (state = initialState, action) => {
         }
 
 
+
+                //delete stuff
     case DELETE_START:
         return state
 
@@ -83,6 +88,23 @@ export const reducer = (state = initialState, action) => {
     case DELETE_FAILED: 
         console.log(action.payload);
         return state
+
+
+
+                //add friend stuff
+    case ADD_START:
+        return state
+
+    case ADD_COMPLETE: 
+        console.log(action.payload);
+        return {
+            ...state,
+            friends: action.payload.data
+        }
+    case ADD_FAILED: 
+        console.log(action.payload);
+        return state
+
 
 
 

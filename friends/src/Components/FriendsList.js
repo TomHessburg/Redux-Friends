@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchFriends, deleteFriend } from '../actions';
+import { fetchFriends, deleteFriend, addFriend } from '../actions';
 import { withRouter } from 'react-router-dom';
+import AddFriendForm from './AddFriendForm'
 
 class FriendsList extends React.Component {
 
@@ -24,6 +25,8 @@ class FriendsList extends React.Component {
                 <button 
                 onClick={this.props.logOut}
                 > log out </button>
+                <hr />
+                <AddFriendForm addFriend={this.props.addFriend} />
                 <hr />
                 {this.props.friends.map(friend => {
                     return(
@@ -50,4 +53,4 @@ const mapStateToProps = state => {
     }
   }
   
-export default withRouter(connect(mapStateToProps, { fetchFriends, deleteFriend })(FriendsList))
+export default withRouter(connect(mapStateToProps, { fetchFriends, deleteFriend, addFriend })(FriendsList))

@@ -13,6 +13,10 @@ export const DELETE_START = "DELETE_START";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 export const DELETE_FAILED = "DELETE_FAILED";
 
+export const ADD_START = "ADD_START"
+export const ADD_COMPLETE = "ADD_COMPLETE"
+export const ADD_FAILED = "ADD_FAILED"
+
 const token = localStorage.getItem('userToken');
 
 
@@ -51,4 +55,13 @@ export const deleteFriend = id => dispatch => {
     axios.delete(`http://localhost:5000/api/friends/${id}`, {headers: {Authorization: token}})
         .then(res => dispatch({type: DELETE_SUCCESS, payload: res}))
         .catch(err => dispatch({ type: DELETE_FAILED, payload: err}))
+}
+
+export const addFriend = friend => dispatch => {
+    dispatch({ type: ADD_START});
+    console.log(friend);
+
+    axios.post(`http://localhost:5000/api/friends`, friend, {headers: {Authorization: token}}  )
+        .then(res => dispatch({type: ADD_COMPLETE, payload: res}))
+        .catch(err => dispatch({ type: ADD_FAILED, payload: err}))
 }
