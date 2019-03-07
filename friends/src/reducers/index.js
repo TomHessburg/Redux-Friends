@@ -17,6 +17,7 @@ import {
 const initialState = {
     isLoggedIn: false,
     token: "",
+    isLoggingIn: false,
     deletingFriend: false,
     fetchingFriends: false,
     friends: [],
@@ -31,18 +32,24 @@ export const reducer = (state = initialState, action) => {
 
             //fetch data stuff
     case FETCHING_START: 
-        return state
+        return {
+            ...state,
+            fetchingFriends: true
+        }
 
     case FETCHING_SUCCESS: 
     console.log(action.payload);
         return {
             ...state,
-            friends: action.payload.data
-        
+            friends: action.payload.data,
+            fetchingFriends: false
         }
 
     case FETCHING_FAILED: 
-        return state
+        return {
+            ...state,
+            fetchingFriends: false
+        }
 
 
 
@@ -52,19 +59,28 @@ export const reducer = (state = initialState, action) => {
 
             //login stuff
     case LOGIN_START: 
-        return state
+        return {
+            ...state,
+            isLoggingIn: true
+        }
 
     case LOGIN_SUCCESS: 
         // window.localStorage.setItem("userToken", action.payload.data.payload)
         return {
             ...state,
             isLoggedIn: true,
-            token: action.payload.data.payload
+            token: action.payload.data.payload,
+            isLoggingIn: false
             }
 
     case LOGIN_FAILED: 
         console.log(action.payload);
-        return state
+        return {
+            ...state,
+            isLoggingIn: false
+        }
+
+
 
     case LOG_OUT:
         return {

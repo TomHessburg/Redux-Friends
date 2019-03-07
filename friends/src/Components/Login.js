@@ -8,8 +8,8 @@ const Login = props => {
     const [password, setPassword] = useState("");
 
     return(
-        <div>
-            <form>
+        <div className="login">
+            <form className="login-form">
                 <label>username:</label>
                 <input 
                 type="text" 
@@ -40,5 +40,5 @@ const Login = props => {
     );
 }
 
- 
+  
 export default Login

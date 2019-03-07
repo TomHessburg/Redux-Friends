@@ -20,10 +20,6 @@ export const ADD_FAILED = "ADD_FAILED"
 const token = localStorage.getItem('userToken');
 
 
-
-
-
-
 export const fetchFriends = () => dispatch => {
 
     dispatch({ type: FETCHING_START});
@@ -47,7 +43,6 @@ export const logOut = () => {
         type: LOG_OUT
     }
 }
-
 
 export const deleteFriend = id => dispatch => {
     dispatch({ type: DELETE_START});

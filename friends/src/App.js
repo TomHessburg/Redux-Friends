@@ -7,7 +7,7 @@ import FriendsList from './Components/FriendsList'
 import Login from './Components/Login'
 
 import { loginAction, logOut } from './actions'
-
+ 
 
 class App extends Component {
 
@@ -23,6 +23,8 @@ class App extends Component {
         {!this.props.isLoggedIn ? 
           <Redirect to="/login" /> 
           : <Redirect to="/friends-list"/>}
+          {this.props.isLoggingIn && (<div>loading your account...</div>)}
+
 
           <Route path="/login" exact render={props => <Login {...props} logUserIn={this.logUserIn} />} />
           <Route path="/friends-list"  render={props => <FriendsList {...props} logOut={this.props.logOut} />} />
@@ -36,7 +38,8 @@ const mapStateToProps = state => {
   return{
     friends: state.friends,
     isLoggedIn: state.isLoggedIn,
-    token: state.token
+    token: state.token,
+    isLoggingIn: state.isLoggingIn
   }
 }
 
