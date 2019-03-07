@@ -6,7 +6,15 @@ import{ Route, NavLink } from 'react-router-dom';
 import FriendsList from './Components/FriendsList'  
 import Login from './Components/Login'
 
+import { loginAction } from './actions'
+
+
 class App extends Component {
+
+  logUserIn = credentials => {
+    console.log(credentials);
+    this.props.loginAction(credentials)
+  }
 
   render() {
     console.log(this.props.isLoggedIn)
@@ -14,7 +22,7 @@ class App extends Component {
       <div className="App">
         {this.props.isLoggedIn ? 
           <Route path="/friendsList" exact render={props => <FriendsList {...props} friends={this.props.friends} />} />
-          : <Login />}
+          : <Login logUserIn={this.logUserIn} />}
 
         
       </div>
@@ -29,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { })(App)
+export default connect(mapStateToProps, { loginAction })(App)
