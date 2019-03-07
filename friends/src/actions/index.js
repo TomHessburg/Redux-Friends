@@ -9,12 +9,18 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAILED = "LOGIN_FAILED"
 export const LOG_OUT = "LOG_OUT"
 
+const token = localStorage.getItem('userToken');
+
+
+
+
 
 
 export const fetchFriends = () => dispatch => {
+
     dispatch({ type: FETCHING_START});
 
-    axios.get("")
+    axios.get("http://localhost:5000/api/friends", {headers: {Authorization: token}})
         .then(res => dispatch({type: FETCHING_SUCCESS, payload: res}))
         .catch(err => dispatch({ type: FETCHING_FAILED, payload: err}))
 }
@@ -26,7 +32,7 @@ export const loginAction = credentials => dispatch => {
     dispatch({ type: LOGIN_START});
 
     axios.post('http://localhost:5000/api/login', credentials)
-        .then(res => dispatch({type: LOGIN_SUCCESS, payload: res}))
+        .then(res => dispatch({type: LOGIN_SUCCESS, payload: res, credentials: credentials}))
         .catch(err => dispatch({ type: LOGIN_FAILED, payload: err}))
 }
 

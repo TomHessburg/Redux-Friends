@@ -6,25 +6,21 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILED,
     LOG_OUT
-    } from '../actions'
-
+} from '../actions'
+ 
 const initialState = {
     isLoggedIn: false,
-    toke: "",
-    fetchingFriends: false,
-    friendsFetched: false,
-    friendsSaved: false,
-    savingFriends: false,
-    updatingFriend: false,
-    friendUpdated: false,
+    token: "",
     deletingFriend: false,
-    friendDeleted: false,
+    fetchingFriends: false,
     friends: [{
         id: 1,
         name: 'Example Friend',
         age: 24,
         email: 'example@lambdaschool.com',
       }],
+    savingFriends: false,
+    updatingFriend: false,
     error: null
 }
 
@@ -37,10 +33,18 @@ export const reducer = (state = initialState, action) => {
         return state
 
     case FETCHING_SUCCESS: 
-        return state
+    console.log(action.payload);
+        return {
+            ...state,
+            friends: action.payload.data
+        
+        }
 
     case FETCHING_FAILED: 
         return state
+
+
+
 
 
 
@@ -50,6 +54,7 @@ export const reducer = (state = initialState, action) => {
         return state
 
     case LOGIN_SUCCESS: 
+        // window.localStorage.setItem("userToken", action.payload.data.payload)
         return {
             ...state,
             isLoggedIn: true,
