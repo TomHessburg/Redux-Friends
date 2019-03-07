@@ -5,7 +5,10 @@ import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAILED,
-    LOG_OUT
+    LOG_OUT,
+    DELETE_START,
+    DELETE_SUCCESS,
+    DELETE_FAILED
 } from '../actions'
  
 const initialState = {
@@ -13,12 +16,7 @@ const initialState = {
     token: "",
     deletingFriend: false,
     fetchingFriends: false,
-    friends: [{
-        id: 1,
-        name: 'Example Friend',
-        age: 24,
-        email: 'example@lambdaschool.com',
-      }],
+    friends: [],
     savingFriends: false,
     updatingFriend: false,
     error: null
@@ -71,6 +69,22 @@ export const reducer = (state = initialState, action) => {
             isLoggedIn: false,
             token: ""
         }
+
+
+    case DELETE_START:
+        return state
+
+    case DELETE_SUCCESS: 
+        console.log(action.payload);
+        return {
+            ...state,
+            friends: action.payload.data
+        }
+    case DELETE_FAILED: 
+        console.log(action.payload);
+        return state
+
+
 
     default:
         return state;
