@@ -5,6 +5,9 @@ const FriendsList = props => {
     return(
         <div className="friends-list">
             <h1>Your Friends List</h1>
+            <button 
+            onClick={props.logOut}
+            > log out </button>
             <hr />
             {props.friends.map(friend => {
                 return(

@@ -4,11 +4,13 @@ import {
     FETCHING_FAILED,
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    LOG_OUT
     } from '../actions'
 
 const initialState = {
     isLoggedIn: false,
+    toke: "",
     fetchingFriends: false,
     friendsFetched: false,
     friendsSaved: false,
@@ -41,18 +43,29 @@ export const reducer = (state = initialState, action) => {
         return state
 
 
+
+
             //login stuff
     case LOGIN_START: 
-        console.log("here");
         return state
 
     case LOGIN_SUCCESS: 
-        console.log("here");
-        return state
+        return {
+            ...state,
+            isLoggedIn: true,
+            token: action.payload.data.payload
+            }
 
     case LOGIN_FAILED: 
-        console.log("here");
+        console.log(action.payload);
         return state
+
+    case LOG_OUT:
+        return {
+            ...state,
+            isLoggedIn: false,
+            token: ""
+        }
 
     default:
         return state;

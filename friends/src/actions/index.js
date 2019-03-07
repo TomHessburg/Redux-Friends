@@ -7,6 +7,7 @@ export const FETCHING_FAILED = "FETCHING_FAILED";
 export const LOGIN_START = "LOGIN_START"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAILED = "LOGIN_FAILED"
+export const LOG_OUT = "LOG_OUT"
 
 
 
@@ -27,4 +28,10 @@ export const loginAction = credentials => dispatch => {
     axios.post('http://localhost:5000/api/login', credentials)
         .then(res => dispatch({type: LOGIN_SUCCESS, payload: res}))
         .catch(err => dispatch({ type: LOGIN_FAILED, payload: err}))
+}
+
+export const logOut = () => {
+    return{
+        type: LOG_OUT
+    }
 }

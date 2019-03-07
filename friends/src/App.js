@@ -6,7 +6,7 @@ import{ Route, NavLink } from 'react-router-dom';
 import FriendsList from './Components/FriendsList'  
 import Login from './Components/Login'
 
-import { loginAction } from './actions'
+import { loginAction, logOut } from './actions'
 
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.props.isLoggedIn ? 
-          <Route path="/friendsList" exact render={props => <FriendsList {...props} friends={this.props.friends} />} />
+          <FriendsList friends={this.props.friends} logOut={this.props.logOut} />
           : <Login logUserIn={this.logUserIn} />}
 
         
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { loginAction })(App)
+export default connect(mapStateToProps, { loginAction, logOut })(App)
